@@ -1,3 +1,5 @@
+import { createPortal } from "react-dom";
+import { FaMixer } from "react-icons/fa";
 import styled from "styled-components";
 
 const StyledModal = styled.div`
@@ -8,7 +10,7 @@ const StyledModal = styled.div`
   background-color: var(--color-grey-0);
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-lg);
-  padding: 3.2rem 4rem;
+  padding: 3.5rem 4.3rem;
   transition: all 0.5s;
 `;
 
@@ -48,3 +50,19 @@ const Button = styled.button`
     color: var(--color-grey-500);
   }
 `;
+
+function Modal({ children, onClose }) {
+  return createPortal(
+    <Overlay>
+      <StyledModal>
+        <Button onClick={onClose}>
+          <FaMixer />
+        </Button>
+        <div>{children}</div>
+      </StyledModal>
+    </Overlay>,
+    document.body
+  );
+}
+
+export default Modal;
