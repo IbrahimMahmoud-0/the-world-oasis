@@ -2,6 +2,7 @@ import { cloneElement, createContext, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import { FaMixer } from "react-icons/fa";
 import styled from "styled-components";
+import { useOutisideClick } from "../hooks/useOutisideClick";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -72,10 +73,12 @@ function Open({ children, opens: opensWindowName }) {
 
 function Window({ children, name }) {
   const { openName, close } = useContext(ModalContext);
+  const ref = useOutisideClick(close);
   if (name !== openName) return null;
+
   return createPortal(
     <Overlay>
-      <StyledModal>
+      <StyledModal ref={ref}>
         <Button onClick={close}>
           <FaMixer />
         </Button>
