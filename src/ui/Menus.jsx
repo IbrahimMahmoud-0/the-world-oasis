@@ -81,7 +81,6 @@ function Menus({ children }) {
 
 function Toggle({ id }) {
   const { openId, close, open, setPosition } = useContext(MenusContext);
-  const ref = useOutisideClick(close);
   function handleClick(e) {
     const rect = e.target.closest("button").getBoundingClientRect();
     openId === "" || openId !== id ? open(id) : close();
@@ -92,17 +91,20 @@ function Toggle({ id }) {
     // console.log(rect);
   }
   return (
-    <StyledToggle ref={ref} onClick={handleClick}>
+    <StyledToggle onClick={handleClick}>
       <FaEllipsisVertical />
     </StyledToggle>
   );
 }
 
 function List({ id, children }) {
-  const { openId, position } = useContext(MenusContext);
+  const { close, openId, position } = useContext(MenusContext);
+  const ref = useOutisideClick(close);
   if (openId !== id) return null;
   return createPortal(
-    <StyledList position={position}>{children}</StyledList>,
+    <StyledList ref={ref} position={position}>
+      {children}
+    </StyledList>,
     document.body
   );
 }
