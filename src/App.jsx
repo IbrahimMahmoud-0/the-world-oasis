@@ -4,6 +4,7 @@ import Account from "./pages/Account";
 import Bookings from "./pages/Bookings";
 import Cabins from "./pages/Cabins";
 import Login from "./pages/Login";
+import Checkin from "./pages/Checkin";
 import PageNotFound from "./pages/PageNotFound";
 import Settings from "./pages/Settings";
 import Users from "./pages/Users";
@@ -35,6 +36,7 @@ function App() {
             <Route path="account" element={<Account />} />
             <Route path="bookings" element={<Bookings />} />
             <Route path="bookings/:bookingId" element={<Booking />} />
+            <Route path="checkin/:bookingId" element={<Checkin />} />
             <Route path="cabins" element={<Cabins />} />
             <Route path="settings" element={<Settings />} />
             <Route path="users" element={<Users />} />
