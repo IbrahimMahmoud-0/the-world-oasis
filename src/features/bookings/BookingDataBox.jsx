@@ -1,16 +1,12 @@
 import styled from "styled-components";
 import { format, isToday } from "date-fns";
-import {
-  HiOutlineChatBubbleBottomCenterText,
-  HiOutlineCheckCircle,
-  HiOutlineCurrencyDollar,
-  HiOutlineHomeModern,
-} from "react-icons/hi2";
 
 import DataItem from "../../ui/DataItem";
 import { Flag } from "../../ui/Flag";
 
 import { formatDistanceFromNow, formatCurrency } from "../../utils/helpers";
+import { FaCheckCircle, FaComments, FaHome } from "react-icons/fa";
+import { FaCircleDollarToSlot } from "react-icons/fa6";
 
 const StyledBookingDataBox = styled.section`
   /* Box */
@@ -123,7 +119,7 @@ function BookingDataBox({ booking }) {
     <StyledBookingDataBox>
       <Header>
         <div>
-          <HiOutlineHomeModern />
+          <FaHome />
           <p>
             {numNights} nights in Cabin <span>{cabinName}</span>
           </p>
@@ -151,20 +147,17 @@ function BookingDataBox({ booking }) {
         </Guest>
 
         {observations && (
-          <DataItem
-            icon={<HiOutlineChatBubbleBottomCenterText />}
-            label="Observations"
-          >
+          <DataItem icon={<FaComments />} label="Observations">
             {observations}
           </DataItem>
         )}
 
-        <DataItem icon={<HiOutlineCheckCircle />} label="Breakfast included?">
+        <DataItem icon={<FaCheckCircle />} label="Breakfast included?">
           {hasBreakfast ? "Yes" : "No"}
         </DataItem>
 
         <Price isPaid={isPaid}>
-          <DataItem icon={<HiOutlineCurrencyDollar />} label={`Total price`}>
+          <DataItem icon={<FaCircleDollarToSlot />} label={`Total price`}>
             {formatCurrency(totalPrice)}
 
             {hasBreakfast &&
