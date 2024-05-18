@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "../../ui/Button";
 import Form from "../../ui/Form";
 import Input from "../../ui/Input";
-import FormRowVertical from "../../ui/FormRow";
+import FormRowVertical from "../../ui/FormRowVertical";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -12,15 +12,7 @@ function LoginForm() {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <FormRowVertical
-        optionalStyle={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "start",
-        }}
-        label="Email address"
-      >
+      <FormRowVertical orientation="vertical" label="Email address">
         <Input
           type="email"
           id="email"
@@ -30,16 +22,7 @@ function LoginForm() {
           onChange={(e) => setEmail(e.target.value)}
         />
       </FormRowVertical>
-      <FormRowVertical
-        optionalStyle={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "start",
-          flex: 1,
-        }}
-        label="Password"
-      >
+      <FormRowVertical orientation="vertical" label="Password">
         <Input
           type="password"
           id="password"
