@@ -9,6 +9,8 @@ import { formatCurrency } from "../../utils/helpers";
 import { formatDistanceFromNow } from "../../utils/helpers";
 import { FaDownload, FaEye } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import { FaArrowDown, FaArrowUp } from "react-icons/fa";
+import { useCheckout } from "../check-in-out/useCheckout";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -57,6 +59,7 @@ function BookingRow({
     "checked-in": "green",
     "checked-out": "silver",
   };
+  const { checkout, isCheckingout } = useCheckout();
 
   return (
     <Table.Row>
@@ -95,9 +98,18 @@ function BookingRow({
           {status === "unconfirmed" && (
             <Menus.Button
               onClick={() => navigate(`/checkin/${bookingId}`)}
-              icon={<FaDownload />}
+              icon={<FaArrowDown />}
             >
               Check in
+            </Menus.Button>
+          )}
+          {status === "checked-in" && (
+            <Menus.Button
+              onClick={() => checkout(bookingId)}
+              disabled={isCheckingout}
+              icon={<FaArrowUp />}
+            >
+              Check out
             </Menus.Button>
           )}
         </Menus.List>

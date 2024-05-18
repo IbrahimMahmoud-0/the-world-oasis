@@ -88,7 +88,10 @@ function Pagination({ count }) {
           <FaChevronLeft />
           Previous
         </PaginationButton>
-        <PaginationButton disabled={currentPage === count} onClick={nextPage}>
+        <PaginationButton
+          disabled={currentPage === pageCount}
+          onClick={nextPage}
+        >
           Next
           <FaChevronRight />
         </PaginationButton>
