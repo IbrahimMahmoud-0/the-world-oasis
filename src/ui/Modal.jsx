@@ -73,6 +73,7 @@ function Open({ children, opens: opensWindowName }) {
 
 function Window({ children, name }) {
   const { openName, close } = useContext(ModalContext);
+
   const ref = useOutisideClick(close);
   if (name !== openName) return null;
 

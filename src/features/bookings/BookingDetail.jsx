@@ -5,9 +5,11 @@ import Row from "../../ui/Row";
 import Heading from "../../ui/Heading";
 import Tag from "../../ui/Tag";
 import ButtonGroup from "../../ui/ButtonGroup";
+import ConfirmDelete from "../../ui/ConfirmDelete";
 import Button from "../../ui/Button";
 import ButtonText from "../../ui/ButtonText";
-
+import Modal from "../../ui/Modal";
+import { useDeleteBooking } from "./useDeleteBooking.js";
 import { useMoveBack } from "../../hooks/useMoveBack";
 import useBooking from "./useBooking";
 import Spinner from "../../ui/Spinner";
@@ -22,6 +24,7 @@ const HeadingGroup = styled.div`
 `;
 
 function BookingDetail() {
+  const { deleteBooking } = useDeleteBooking();
   const navigate = useNavigate();
   const { checkout, isCheckingout } = useCheckout();
   // const booking = {};
@@ -56,6 +59,25 @@ function BookingDetail() {
         <Button variation="secondary" onClick={moveBack}>
           Back
         </Button>
+        <Modal>
+          <Modal.Open opens="delete">
+            <Button variation="danger">Delete booking</Button>
+          </Modal.Open>
+
+          <Modal.Window name="delete">
+            <ConfirmDelete
+              resourceName="booking"
+              onConfirm={() => {
+                deleteBooking(id, {
+                  onSuccess: () => {
+                    navigate(-1);
+                  },
+                });
+              }}
+            />
+          </Modal.Window>
+        </Modal>
+
         {status === "checked-in" && (
           <Button
             onClick={() => {
