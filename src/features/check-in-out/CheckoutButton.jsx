@@ -2,7 +2,7 @@ import Button from "../../ui/Button";
 import { useCheckout } from "./useCheckout";
 function CheckoutButton({ bookingId }) {
   const { checkout, isCheckingout } = useCheckout();
-  console.log(bookingId);
+
   return (
     <Button
       variation="primary"
